@@ -23,15 +23,25 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class ReadRss extends AsyncTask<Void, Void, Void> {
 
+    private ArrayList<FeedItem>feedItems=new ArrayList<>();
+
+
     Context context;
     String address = "http://ntv.nation.co.ke/2720202-2720202-view-asFeed-a4x2dfz/index.xml";
     ProgressDialog progressDialog;
     URL url;
 
+
+    //constructor for the class
     public ReadRss(Context context) {
         this.context = context;
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading...");
+    }
+
+    //constructor that converts the feedItems ArrayList into an object to be used in the mainActivity
+    public ReadRss( ArrayList<FeedItem>feedItems) {
+        feedItems=new ArrayList<FeedItem>();
     }
 
     @Override
@@ -55,7 +65,7 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
 
     private void ProcessXml(Document data) {
         if (data != null) {
-            ArrayList<FeedItem>feedItems=new ArrayList<>();
+           // ArrayList<FeedItem>feedItems=new ArrayList<>();
             Element root = data.getDocumentElement();
             Node channel = root.getChildNodes().item(1);
             NodeList items = channel.getChildNodes();
@@ -87,6 +97,9 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
             }
         }
     }
+
+
+
 
     public Document Getdata() {
         try {
