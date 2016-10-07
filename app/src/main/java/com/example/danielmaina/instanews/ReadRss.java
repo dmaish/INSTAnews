@@ -25,6 +25,12 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
 
     private ArrayList<FeedItem>feedItems=new ArrayList<>();
 
+    //getter class for the feedItems ArrayList to enable it to be accessed by the ArrayAdapter in the mainActivity
+
+
+    public ArrayList<FeedItem> getFeedItems() {
+        return feedItems;
+    }
 
     Context context;
     String address = "http://ntv.nation.co.ke/2720202-2720202-view-asFeed-a4x2dfz/index.xml";
@@ -39,10 +45,7 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
         progressDialog.setMessage("Loading...");
     }
 
-    //constructor that converts the feedItems ArrayList into an object to be used in the mainActivity
-    public ReadRss( ArrayList<FeedItem>feedItems) {
-        feedItems=new ArrayList<FeedItem>();
-    }
+
 
     @Override
     protected void onPreExecute() {
@@ -78,19 +81,24 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
                         Node cureent = itemchilds.item(j);
                         if (cureent.getNodeName().equalsIgnoreCase("title")){
                             item.setTitle(cureent.getTextContent());
+                            item.getTitle();
                         }else if (cureent.getNodeName().equalsIgnoreCase("description")){
                             item.setDescription(cureent.getTextContent());
+                            item.getDescription();
                         }else if (cureent.getNodeName().equalsIgnoreCase("pubDate")){
                             item.setPubDate(cureent.getTextContent());
+                            item.getPubDate();
                         }else if (cureent.getNodeName().equalsIgnoreCase("link")){
                             item.setLink(cureent.getTextContent());
+                            item.getLink();
                         }
                     }
                     feedItems.add(item);
-                    Log.d("itemTitle", item.getTitle());
-                    Log.d("itemDescription",item.getDescription());
-                    Log.d("itemPubDate",item.getPubDate());
-                    Log.d("itemLink",item.getLink());
+                    Log.d("theItem", String.valueOf(item));
+//                    Log.d("itemTitle", item.getTitle());
+//                    Log.d("itemDescription",item.getDescription());
+//                    Log.d("itemPubDate",item.getPubDate());
+//                    Log.d("itemLink",item.getLink());
 
 
                 }
