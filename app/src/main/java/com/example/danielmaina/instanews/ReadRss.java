@@ -25,17 +25,23 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
 
     private ArrayList<FeedItem>feedItems=new ArrayList<>();
 
+
     //getter class for the feedItems ArrayList to enable it to be accessed by the ArrayAdapter in the mainActivity
-
-
     public ArrayList<FeedItem> getFeedItems() {
         return feedItems;
     }
 
+
     Context context;
-    String address = "http://ntv.nation.co.ke/2720202-2720202-view-asFeed-a4x2dfz/index.xml";
+    //String address = "http://ntv.nation.co.ke/2720202-2720202-view-asFeed-a4x2dfz/index.xml";
+    String address = "http://www.sciencemag.org/rss/news_current.xml";
     ProgressDialog progressDialog;
     URL url;
+
+    //default constructor
+    public ReadRss(){
+
+    }
 
 
     //constructor for the class
@@ -68,7 +74,6 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
 
     private void ProcessXml(Document data) {
         if (data != null) {
-           // ArrayList<FeedItem>feedItems=new ArrayList<>();
             Element root = data.getDocumentElement();
             Node channel = root.getChildNodes().item(1);
             NodeList items = channel.getChildNodes();
@@ -95,10 +100,10 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
                     }
                     feedItems.add(item);
                     Log.d("theItem", String.valueOf(item));
-//                    Log.d("itemTitle", item.getTitle());
-//                    Log.d("itemDescription",item.getDescription());
-//                    Log.d("itemPubDate",item.getPubDate());
-//                    Log.d("itemLink",item.getLink());
+                    Log.d("itemTitle", item.getTitle());
+                    Log.d("itemDescription",item.getDescription());
+                    Log.d("itemPubDate",item.getPubDate());
+                    Log.d("itemLink",item.getLink());
 
 
                 }
